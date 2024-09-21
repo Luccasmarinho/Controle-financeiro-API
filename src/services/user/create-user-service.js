@@ -4,7 +4,7 @@ import bcrypt from "bcrypt"
 
 import { appError } from "../../errors/app-errors.js"
 
-const criar = async (data) => {
+const serviceCriar = async (data) => {
     const { nome, email, senha } = data
 
     const usuarioExiste = await prisma.usuario.findFirst({
@@ -30,4 +30,4 @@ const criar = async (data) => {
     }
 }
 
-export default criar
+export default serviceCriar

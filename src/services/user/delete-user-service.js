@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-const deletar = async (id) => {
+const serviceDeletar = async (id) => {
     const deletarUser = await prisma.usuario.delete({
         where: {
             id
@@ -15,4 +15,4 @@ const deletar = async (id) => {
     return deletarUser
 }
 
-export default deletar
+export default serviceDeletar

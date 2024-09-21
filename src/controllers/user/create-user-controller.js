@@ -1,8 +1,8 @@
-import criar from "../../services/user/create-user-service.js"
+import serviceCriar from "../../services/user/create-user-service.js"
 
 const criarUsuario = async (req, res) => {
     try {
-        await criar(req.body)
+        await serviceCriar(req.body)
         return res.status(201).json({ Mensagem: "Usuário cadastrado com sucesso." })
         
     } catch (error) {

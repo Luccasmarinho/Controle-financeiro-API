@@ -1,4 +1,4 @@
-import deletar from "../../services/user/delete-user-service.js"
+import serviceDeletar from "../../services/user/delete-user-service.js"
 
 const deletarUsuario = (req, res) => {
     try {
