@@ -1,9 +1,6 @@
 import jwt from "jsonwebtoken";
 
 const autenticacaoToken = async (req, res, next) => {
-    //BEARER TOKEN
-    //["BEARER", "TOKEN"]
-    //TOKEN
     const { authorization } = req.headers
 
     if (!authorization) {
