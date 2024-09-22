@@ -10,9 +10,11 @@ const autenticacaoToken = async (req, res, next) => {
     const token = authorization.split(" ")[1]
 
     try {
-        const { id } = await jwt.verify(token, process.env.SECRET_KEY)
+        const verificandoToken = await jwt.verify(token, process.env.SECRET_KEY)
 
-        req.userId = id
+        const dataExpiracaoDoToken = new Date(verificandoToken.exp * 1000).toLocaleString()  
+
+        req.user = {verificandoToken, dataExpiracaoDoToken}
         
         next()
     } catch (error) {
