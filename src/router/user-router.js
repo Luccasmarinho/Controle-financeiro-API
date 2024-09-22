@@ -7,6 +7,7 @@ import deletarUsuario from "../controllers/user/delete-user-controller.js";
 
 import schema from "../schemas/user-schemas.js";
 import validateBody from "../middlewares/validateBody.js";
+import autenticacaoToken from "../middlewares/token-autenticate.js";
 
 rotasUser.post(
     "/usuarios", 
@@ -16,6 +17,7 @@ rotasUser.post(
 
 rotasUser.get(
     "/usuarios", 
+    autenticacaoToken,
     listagemUsuarios
 )
 
