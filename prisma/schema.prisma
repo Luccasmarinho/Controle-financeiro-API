@@ -32,7 +32,7 @@ model Transacao {
   usuario_id    Int
   data_criacao  DateTime  @default(now())
 
-  usuario      Usuario    @relation(fields: [usuario_id], references: [id])
+  usuario      Usuario    @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
 
   @@map("transacoes")
 
