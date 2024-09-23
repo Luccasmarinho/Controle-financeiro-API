@@ -23,6 +23,7 @@ rotasUser.get(
 
 rotasUser.delete(
     "/usuarios/:id",
+    autenticacaoToken,
     deletarUsuario
 )
 
