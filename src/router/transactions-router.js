@@ -4,6 +4,7 @@ const rotasTransacao = express.Router();
 import criarTransacao from "../controllers/transactions/create-transaction-controller.js";
 import listarTransacao from "../controllers/transactions/list-transaction-controller.js";
 import deletarTransacao from "../controllers/transactions/delete-transaction-controller.js";
+import totalTransacoes from "../controllers/transactions/total-transaction-controller.js";
 
 import schema from "../schemas/transaction-schema.js";
 import validateBody from "../middlewares/validateBody.js"
@@ -26,6 +27,12 @@ rotasTransacao.delete(
     "/transacoes/:id",
     autenticacaoToken,
     deletarTransacao
+)
+
+rotasTransacao.get(
+    "/transacoes/total",
+    autenticacaoToken,
+    totalTransacoes
 )
 
 export default rotasTransacao
