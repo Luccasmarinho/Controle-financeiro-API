@@ -10,7 +10,7 @@ const serviceDeletar = async (userId, paramsId) => {
     } else {
         const deletarUser = await prisma.usuario.delete({
             where: {
-                id: userId
+                id: Number(paramsId)
             }
         })
         return deletarUser

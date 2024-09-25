@@ -1,12 +1,12 @@
-import serviceDeletar from "../../services/user/delete-user-service.js"
+import serviceDeletar from "../../services/transactions/delete-transaction-service.js"
 
-const deletarUsuario = async (req, res) => {
-    const { id: userId } = req.user.verificandoToken;
-    const { id: paramsId } = req.params;
+const deletarTransacao = async (req, res) => {
+    const { id: userId } = req.user.verificandoToken
+    const { id: paramsId } = req.params
 
     try {
         await serviceDeletar(userId, Number(paramsId))
-        return res.status(200).json({ Mensagem: "Usuário deletado com sucesso." })
+        return res.status(200).json({ Mensagem: "Transação deletada com sucesso." })
     } catch (error) {
         const mensagemRetorno = error.message == "Você não tem permissão para deletar esse usuário."
         ? res.status(error.status).json({ Mensagem: `${error.message}` }) 
@@ -16,4 +16,4 @@ const deletarUsuario = async (req, res) => {
     }
 }
 
-export default deletarUsuario
+export default deletarTransacao
