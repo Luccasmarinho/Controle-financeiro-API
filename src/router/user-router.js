@@ -4,6 +4,7 @@ const rotasUser = express.Router();
 import criarUsuario from "../controllers/user/create-user-controller.js";
 import listagemUsuarios from "../controllers/user/list-user-controller.js";
 import deletarUsuario from "../controllers/user/delete-user-controller.js";
+import dadosUsuarioLogado from "../controllers/user/data-user-controller.js";
 
 import schema from "../schemas/user-schemas.js";
 import validateBody from "../middlewares/validateBody.js";
@@ -25,6 +26,12 @@ rotasUser.delete(
     "/usuarios/:id",
     autenticacaoToken,
     deletarUsuario
+)
+
+rotasUser.get(
+    "/dados/usuario",
+    autenticacaoToken,
+    dadosUsuarioLogado
 )
 
 export default rotasUser
