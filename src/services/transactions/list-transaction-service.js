@@ -21,6 +21,9 @@ const serviceLista = async (userId, queryId) => {
                 tipo: true,
                 categoria: true,
                 usuario_id: true
+            },
+            orderBy: {
+                id: "asc"
             }
         })
         return listarTransacao
