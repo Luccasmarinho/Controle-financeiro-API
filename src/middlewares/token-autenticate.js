@@ -4,7 +4,7 @@ const autenticacaoToken = async (req, res, next) => {
     const { authorization } = req.headers
 
     if (!authorization) {
-        return res.status(401).json({ Mensagem: "Usuário não autorizado." })
+        return res.status(401).json({ Mensagem: "Usuário não autorizado."})
     }
 
     const token = authorization.split(" ")[1]
@@ -19,8 +19,8 @@ const autenticacaoToken = async (req, res, next) => {
         next()
     } catch (error) {
         const mensagemRetorno = error.message == "invalid signature"
-        ? res.status(401).json({ Mensagem: "Usuário não autorizado." })
-        : res.status(401).json({ Mensagem: "Usuário não autorizado." })
+        ? res.status(401).json({ Mensagem: "Usuário não autorizado.", erro: error.message })
+        : res.status(401).json({ Mensagem: "Usuário não autorizado.", erro: error.message })
 
         return mensagemRetorno
     }
