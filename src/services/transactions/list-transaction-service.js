@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 import { appError } from "../../errors/app-errors.js"
 
-const serviceLista = async (userId, queryId) => {
+const serviceLista = async (userId, queryId, page, limit) => {
     if (!queryId) {
         appError("Parâmetro necessário ausente.", 400)
     }
@@ -11,6 +11,7 @@ const serviceLista = async (userId, queryId) => {
     if (userId != queryId) {
         appError("Você não tem permissão para listar esse usuário.", 403)
     } else {
+        const skip = (page - 1) * limit;
         const listarTransacao = await prisma.transacao.findMany({
             where: {
                 usuario_id: Number(queryId)
@@ -24,9 +25,21 @@ const serviceLista = async (userId, queryId) => {
             },
             orderBy: {
                 id: "asc"
-            }
+            },
+            skip: skip,
+            take: Number(limit),
         })
-        return listarTransacao
+        const totalTransacoes = await prisma.transacao.count({
+            where: {
+                usuario_id: Number(queryId),
+            },
+        });
+
+        return {
+            listarTransacao,
+            totalPages: Math.ceil(totalTransacoes / limit),
+            currentPage: page
+        }
     }
 }
 
