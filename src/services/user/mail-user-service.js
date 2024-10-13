@@ -1,16 +1,22 @@
 import nodemailer from "nodemailer"
-import crypto from "crypto"
 import jwt from "jsonwebtoken";
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
-function senhaAleatoria(length = 15) {
-    return crypto.randomBytes(length).toString('hex').slice(0, length);
-}
+const serviceEnviarEmail = async (destinatario) => {
+    const token = jwt.sign({ destinatario }, process.env.SECRET_KEY, { expiresIn: "24h" })
 
+    const usuarioExistente = await prisma.usuario.findUnique({
+        where: {
+            email: destinatario
+        }
+    })
 
-const serviceRedefinirSenha = (destinatario) => {
-    const token = jwt.sign({ destinatario }, process.env.SECRET_KEY, { expiresIn: "1h" })
+    if (!usuarioExistente) {
+        return
+    }
 
-    const link = `https://controle-financeiro-frontend-mocha.vercel.app?token=${token}`
+    const link = `https://controle-financeiro-frontend-mocha.vercel.app//src/pages/reset-pass.html?token=${token}`
 
     const transporter = nodemailer.createTransport({
         host: process.env.MAIL_HOST,
@@ -30,4 +36,4 @@ const serviceRedefinirSenha = (destinatario) => {
     })
 }
 
-export default serviceRedefinirSenha
+export default serviceEnviarEmail

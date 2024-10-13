@@ -12,7 +12,11 @@ const schema = {
     }),
     mail: Joi.object({
         email: Joi.string().email().required()
+    }),
+    resetPass: Joi.object({
+        senha: Joi.string().min(8).max(50).required()
     })
+
 }
 
 export default schema
