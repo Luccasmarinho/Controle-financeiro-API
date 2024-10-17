@@ -28,7 +28,7 @@ const serviceEnviarEmail = async (destinatario) => {
         }
     })
 
-    transporter.sendMail({
+    await transporter.sendMail({
         from: "Luccas Marinho <luccas88oliveira@gmail.com>",
         to: destinatario,
         subject: "Redefinição de senha",
