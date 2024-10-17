@@ -16,7 +16,7 @@ const serviceEnviarEmail = async (destinatario) => {
         return
     }
 
-    const link = `https://controle-financeiro-frontend-mocha.vercel.app//src/pages/reset-pass.html?token=${token}`
+    const link = `https://controle-financeiro-frontend-mocha.vercel.app/src/pages/reset-pass.html?token=${token}`
 
     const transporter = nodemailer.createTransport({
         host: process.env.MAIL_HOST,
